@@ -1,0 +1,8 @@
+path: ./dataset_yolo
+train: test.txt
+val: test.txt
+test: test.txt
+
+# Classes
+names:
+  0: ok
