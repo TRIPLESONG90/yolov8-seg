@@ -31,7 +31,7 @@ def train():
         for i in range(len(LABELS)):
             f.write(f"  {i}: {LABELS[i]}\n")
 
-    model.train(data="./train.yaml", epochs=800, workers=1, batch=20, imgsz=640, patience=0,
+    model.train(data="./train.yaml", epochs=800, workers=1, batch=40, imgsz=640, patience=0,
                 hsv_h = 0,
                 hsv_s = 0,
                 hsv_v = 0.05,
