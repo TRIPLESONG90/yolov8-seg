@@ -1,1 +1,6 @@
 /env
+/src/dataset
+/src/runs
+*.pyc
+*.pt
+*.yaml
