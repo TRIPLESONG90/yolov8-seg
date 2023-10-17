@@ -5,6 +5,11 @@ FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
 COPY src /src
 COPY requirements.txt /requirements.txt
 
+#remove dataset folder
+RUN rm -rf /src/dataset
+#remove runs folder
+RUN rm -rf /src/runs
+
 #install requirements
 RUN pip install -r /requirements.txt
 
