@@ -1,19 +1,19 @@
 from multiprocessing import freeze_support
 from ultralytics import YOLO
 
-from labelme2yolov8 import convert_label
+from coco2yolov8 import convert_label
 import os
 import time
 def train():
-    SRC_DIR = "/mnt/volume1/strap-segmentation"
+    SRC_DIR = "../dataset"
     DST_DIR = "dataset"
-    LABELS = ["OK"]
+    LABELS = ["unoccluded", "occluded"]
 
     os.path.isdir(DST_DIR) and os.system(f"rm -rf {DST_DIR}")
 
     convert_label(SRC_DIR, DST_DIR, LABELS)
 
-    model = YOLO("./yolov8n-seg.pt", "segmentation")
+    model = YOLO("best.pt", "segmentation")
 
     #get full path of DST_DIR
     DST_DIR = os.path.abspath(DST_DIR)
@@ -31,7 +31,7 @@ def train():
         for i in range(len(LABELS)):
             f.write(f"  {i}: {LABELS[i]}\n")
 
-    model.train(data="./train.yaml", epochs=800, workers=1, batch=40, imgsz=640, patience=0,
+    model.train(data="./train.yaml", epochs=50, workers=1, batch=14, imgsz=640, patience=0,
                 hsv_h = 0,
                 hsv_s = 0,
                 hsv_v = 0.05,

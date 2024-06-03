@@ -4,3 +4,7 @@
 *.pyc
 *.pt
 *.yaml
+*.png
+*.jpg
+*.json
+*.csv
