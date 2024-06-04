@@ -8,9 +8,11 @@ IMG_DIR = "../dataset/images"
 SAVE_PATH = "test.json"
 imgs = glob.glob(f'{IMG_DIR}/*.png')
 model = YOLO("best.pt")
-j = json.load(open(f'../dataset/annotations/instances_default.json'))
+j = json.load(open(f'../dataset/annotations/instances_default1.json'))
 
 images = j["images"]
+
+# j["annotations"] = []
 for img_file in imgs:
     img = cv2.imread(img_file)
     result = model(img)[0]
@@ -34,7 +36,8 @@ for img_file in imgs:
         masks = result.masks  # 마스크 정보
 
         for box, mask in zip(boxes, masks):
-
+            if box.conf.item() < 0.85:
+                continue
             xy = np.array(mask.xy).astype(np.int32).tolist()
 
             flattened_points = [point for sublist in xy for point in sublist]
